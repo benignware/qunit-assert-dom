@@ -1,0 +1,16 @@
+{
+  "name": "qunit-assert-dom",
+  "description": "QUnit assertion plugin for comparing dom nodes",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/benignware/qunit-assert-dom.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-copy": "^0.8.0",
+    "grunt-contrib-jshint": "~0.4.3",
+    "grunt-contrib-qunit": "^0.5.2",
+    "grunt-contrib-uglify": "^0.8.0"
+  }
+}

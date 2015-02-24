@@ -1,14 +1,3 @@
-qunit-assert-dom
-================
-
-> QUnit assertion plugin for comparing dom nodes
-
-Usage
------
-
-
-### Assert dom equal
-```js
 test("Equal", function(assert) {
   assert.domEqual(
     $('<div id="content" class="content">Content</div>'),
@@ -16,11 +5,7 @@ test("Equal", function(assert) {
     'Dom content should be equal'
   );
 });
-```
 
-### Assert dom not equal
-
-```js
 test("Not Equal", function(assert) {
   assert.domNotEqual(
     $('<div id="content" class="content"></div>'),
@@ -28,5 +13,3 @@ test("Not Equal", function(assert) {
     'Dom content should not be equal'
   );
 });
-```
-
