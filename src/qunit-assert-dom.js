@@ -6,7 +6,26 @@
     throw 'QUnit needs to loaded before qunit-assert-dom';
   }
   
-  var serialize = (function() {
+  var 
+    parse = (function() {
+      if (typeof window.DOMParser !== "undefined") {
+        return function(xmlStr) {
+          var doc = ( new window.DOMParser() ).parseFromString(xmlStr, "text/xml");
+          return doc;
+        };
+      } else if (typeof window.ActiveXObject !== "undefined" && new window.ActiveXObject("Microsoft.XMLDOM")) {
+        return function(xmlStr) {
+          var doc = new window.ActiveXObject("Microsoft.XMLDOM");
+          doc.async = "false";
+          doc.loadXML(xmlStr);
+          return doc;
+        };
+      } else {
+        throw new Error("No XML parser found");
+      }
+    })(), 
+  
+  serialize = (function() {
     function toArray(obj) {
       var l = obj.length, i, out = [];
       for (i = 0; i < l; i++) {
@@ -15,7 +34,12 @@
       return out;
     }
     return function(el, opts) {
-      el = el[0] || el;
+      if (typeof el === 'string') {
+        el = parse(el);
+        el = el.documentElement;
+      }
+      el = el instanceof Array || el.toArray ? el[0] : el;
+      el = !el.ownerDocument ? el.documentElement : el;
       opts = opts || {};
       var
         prettify = typeof opts.prettify === 'boolean' ? opts.prettify : true,
