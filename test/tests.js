@@ -1,7 +1,8 @@
 test("Equal", function(assert) {
+  
   assert.domEqual(
-    $('<div id="content" class="content">Content</div>'),
-    '<div class="content" id="content">Content</div>',
+    $('<div class="content" id="content" style="background-color: rgb(239, 239, 239); padding: 5px;">Content</div>'),
+    $('<div id="content" class="content" style="padding: 5px; background-color: rgb(239, 239, 239);">Content</div>'),
     'Dom content should be equal'
   );
 });
