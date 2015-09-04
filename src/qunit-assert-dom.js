@@ -58,7 +58,9 @@
           lineSeparator = prettify ? opts.lineSeparator || "\n" : "",
           tabSpace = prettify ? opts.tabSpace || "  " : "",
           level = arguments[2] || 0, tabs = (new Array((level) + 1)).join(tabSpace);
-        prettify && clean(el);
+        if (prettify) {
+          clean(el);
+        }
         return (level > 0 ? lineSeparator : "") + tabs + (el.nodeType === 1 ? "<" + el.tagName.toLowerCase() + toArray(el.attributes).sort(function(a, b) {
           return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
         }).map(function(node) {
