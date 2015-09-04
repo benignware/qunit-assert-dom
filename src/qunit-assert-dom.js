@@ -62,12 +62,18 @@
         return (level > 0 ? lineSeparator : "") + tabs + (el.nodeType === 1 ? "<" + el.tagName.toLowerCase() + toArray(el.attributes).sort(function(a, b) {
           return a.name < b.name ? -1 : a.name > b.name ? 1 : 0;
         }).map(function(node) {
-          return " " + node.name.toLowerCase() + "=\"" + node.value + "\"";
+          var
+            name = node.name.toLowerCase(),
+            value = node.value;
+          if (name === 'style') {
+            value = value.split(/\s*;\s*/).sort().join("; ");
+          }
+          return " " + name + "=\"" + value + "\"";
         }).join("") + ">" + toArray((el = el[0] || el).childNodes).map(function(elem, index) {
           return serialize(elem, opts, level + 1);
         }).join("") + lineSeparator + tabs + "</" + el.tagName.toLowerCase() + ">" : 
           el.nodeType === 3 ? el.nodeValue : "");
-      };
+        };
     })();
   
   QUnit.extend( QUnit.assert, {
